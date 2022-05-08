@@ -152,6 +152,18 @@ const RootMutationType = new GraphQLObjectType({
                 return book
             }
         },
+        deleteBook: {
+            type: BookType,
+            description: 'Delete a book',
+            args: {
+                id: {type: GraphQLNonNull(GraphQLInt)}
+            },
+            resolve: (parent, args) => {
+                const book = books.find(book => book.id === args.id)
+                books.splice(books.findIndex(b => b.id === book.id),1)
+                return book
+            }
+        }
     })
 })
 
